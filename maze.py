@@ -2,9 +2,11 @@ from tile import Tile
 
 class Maze:
 
-    def __init__(self, size):
+    def __init__(self, size, start, end):
         self.size = size
         self.tiles = {}
+        self.start = start
+        self.end = end
     
     def fill_maze(self):
         tile_counter = 0
