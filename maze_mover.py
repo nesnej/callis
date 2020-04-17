@@ -1,21 +1,6 @@
 from random_move import generate_random_move
 from maze import Maze
 
-
-test_maze = Maze(5, 0, 23)
-test_maze.fill_maze()
-
-
-test_maze.tiles[2].passable = False
-test_maze.tiles[5].passable = False
-test_maze.tiles[7].passable = False
-test_maze.tiles[9].passable = False
-test_maze.tiles[10].passable = False
-test_maze.tiles[17].passable = False
-test_maze.tiles[18].passable = False
-test_maze.tiles[22].passable = False
-
-
 def maze_mover(maze):
     running = True
     solution_path = []
@@ -43,6 +28,19 @@ def maze_mover(maze):
 
 
 # Everything Below is just for testing
+test_maze = Maze(5, 0, 21)
+test_maze.fill_maze()
+
+
+test_maze.tiles[5].passable = False
+test_maze.tiles[6].passable = False
+test_maze.tiles[8].passable = False
+test_maze.tiles[13].passable = False
+test_maze.tiles[16].passable = False
+test_maze.tiles[17].passable = False
+test_maze.tiles[18].passable = False
+test_maze.tiles[22].passable = False
+
 total_moves = 0
 for x in range(10000): 
     total_moves += maze_mover(test_maze)
