@@ -4,10 +4,14 @@ def lupus_algorithm(maze):
     solution_path = []
     current_position = maze.tiles[maze.start]
     start_column_spot = current_position
+    paths = []
     right_openings = []
     left_openings = []
+    current_path_up = []
+    current_path_down = []
     up_down_openings = []
     current_up = True
+    last_path_used = 0
     while True:
         solution_path.append(current_position)
         
@@ -44,9 +48,13 @@ def lupus_algorithm(maze):
                 next_position = current_position.up
                 current_position = next_position
                 up_down_openings.append(current_position)
+                current_path_up.append(current_position)
             else:
                 current_up = False
                 current_position = start_column_spot
+                paths.append(current_path_up)
+                last_path_used = current_path_up
+                current_path_up = []
         else:
             already_added = False
             if up_down_openings:
@@ -57,19 +65,33 @@ def lupus_algorithm(maze):
                 next_position = current_position.down
                 current_position = next_position
                 up_down_openings.append(current_position)
+                current_path_down.append(current_position)
             #Takes your current position to one of the right or left openings
             else:
+                paths.append(current_path_down)
+                last_path_used = current_path_down
+                current_path_up = []
                 current_up = True
                 if right_openings:
                     current_position = right_openings[0]
                     del right_openings[0]
+                    for path in paths:
+                        for square in path:
+                            if square == current_position.left:
+                                path.append(current_position)
+                                last_path_used = path
                 elif left_openings:
                     current_position = left_openings[0]
+                    for path in paths:
+                        for square in path:
+                            if square == current_position.right:
+                                path.append(current_position)
+                                last_path_used = path
                     del left_openings[0]
                     
                 start_column_spot = current_position
     
-    return len(solution_path)
+    return last_path_used
 
 
 # Testing below
@@ -105,11 +127,6 @@ for key, tile in test_maze.tiles.items():
         column += 1
 
 # We don't need to run it 10000 times since the answer will always be the same based on a maze, but I am to test its speed compared to random moves
-total_moves = 0
-for x in range(10000):
-    total_moves += lupus_algorithm(test_maze)
 
-total_moves /= 10000
-    
 
 print(lupus_algorithm(test_maze))
