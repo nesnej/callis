@@ -69,7 +69,10 @@ def lupus_algorithm(maze):
                     
                 start_column_spot = current_position
     
-    return len(solution_path)
+    answer = list(dict.fromkeys(solution_path))
+    
+    
+    return answer
 
 
 # Testing below
@@ -105,11 +108,10 @@ for key, tile in test_maze.tiles.items():
         column += 1
 
 # We don't need to run it 10000 times since the answer will always be the same based on a maze, but I am to test its speed compared to random moves
-total_moves = 0
-for x in range(10000):
-    total_moves += lupus_algorithm(test_maze)
-
-total_moves /= 10000
     
 
-print(lupus_algorithm(test_maze))
+
+test1 = lupus_algorithm(test_maze)
+print(test1)
+for tile in test1:
+    print(tile.position)
