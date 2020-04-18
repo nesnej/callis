@@ -7,3 +7,4 @@ class Tile:
         self.right = right
         self.passable = passable
         self.position = None
+        self.rec = None
