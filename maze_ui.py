@@ -1,6 +1,7 @@
 import pygame
 from maze import Maze
 from tile import Tile
+from lupus_algorithm import lupus_algorithm
 
 # Pygame initialization
 board_width = 800
@@ -14,7 +15,7 @@ clock = pygame.time.Clock()
 
 
 # Creaate a maze for testing purposes
-maze = Maze(5, 0, 23)
+maze = Maze(20, 0, 349)
 maze.fill_maze()
 maze.tiles[2].passable = False
 maze.tiles[5].passable = False
@@ -24,6 +25,44 @@ maze.tiles[10].passable = False
 maze.tiles[17].passable = False
 maze.tiles[18].passable = False
 maze.tiles[22].passable = False
+maze.tiles[240].passable = False
+maze.tiles[241].passable = False
+maze.tiles[242].passable = False
+maze.tiles[243].passable = False
+maze.tiles[244].passable = False
+maze.tiles[245].passable = False
+maze.tiles[246].passable = False
+maze.tiles[247].passable = False
+maze.tiles[248].passable = False
+maze.tiles[250].passable = False
+maze.tiles[251].passable = False
+maze.tiles[252].passable = False
+maze.tiles[253].passable = False
+maze.tiles[254].passable = False
+maze.tiles[255].passable = False
+maze.tiles[256].passable = False
+maze.tiles[257].passable = False
+maze.tiles[258].passable = False
+maze.tiles[259].passable = False
+maze.tiles[31].passable = False
+maze.tiles[32].passable = False
+maze.tiles[33].passable = False
+maze.tiles[34].passable = False
+maze.tiles[35].passable = False
+maze.tiles[36].passable = False
+maze.tiles[37].passable = False
+maze.tiles[38].passable = False
+maze.tiles[39].passable = False
+maze.tiles[40].passable = False
+maze.tiles[61].passable = False
+maze.tiles[62].passable = False
+maze.tiles[63].passable = False
+maze.tiles[64].passable = False
+maze.tiles[65].passable = False
+maze.tiles[66].passable = False
+maze.tiles[67].passable = False
+maze.tiles[68].passable = False
+
 
 # Test solution path list
 t2 = maze.tiles[1]
@@ -70,6 +109,9 @@ for i, tile in maze.tiles.items():
         current_left = 0
         current_top += rectangle_height
 
+solution_path = lupus_algorithm(maze)
+del solution_path[0]
+del solution_path[-1]
 for tile in solution_path:
     pygame.draw.rect(screen, path_color, tile.rec)
 
